@@ -52,6 +52,7 @@ const reverseNodes = (head) => {  // 3, 2, 1
 
     while (current !== null) {  //we didn't consider current.next != null otherwise 1 won't execute
         const nextNode = current.next;
+        current.next = previous;
         previous = current   // 1 -> 2 -> 3 -> null
         current = nextNode;
     }
