@@ -31,3 +31,49 @@ function cyclicSort(nums) {
   
     return nums;
 }
+
+
+// Example
+// cyclicSort([3, 1, 5, 4, 2]);
+
+// Initial array:
+
+// [3, 1, 5, 4, 2]
+
+// At index 0, the value is 3.
+
+// Its correct index is:
+
+// 3 - 1 = 2
+
+// Swap index 0 with index 2:
+
+// [5, 1, 3, 4, 2]
+
+// Now index 0 contains 5.
+
+// Its correct index is:
+
+// 5 - 1 = 4
+
+// Swap:
+
+// [2, 1, 3, 4, 5]
+
+// Now index 0 contains 2.
+
+// Its correct index is:
+
+// 2 - 1 = 1
+
+// Swap:
+
+// [1, 2, 3, 4, 5]
+
+// Now 1 is at index 0, so move i forward.
+
+// Why don’t we increase i after swapping?
+
+// After a swap, the new number placed at index i may still be in the wrong position.
+
+// So we keep checking the same index until the correct number is there.
