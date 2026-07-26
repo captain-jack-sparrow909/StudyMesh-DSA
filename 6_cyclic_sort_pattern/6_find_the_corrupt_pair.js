@@ -51,26 +51,236 @@ findCorruptPair([3, 1, 2, 5, 2]);
 // findCorruptPair([3, 1, 2, 5, 2]);
 // // [2, 4]
 
-// After cyclic sorting, the array becomes:
+// step by step: 
 
+// Let’s walk through:
+
+// ```javascript
+// findCorruptPair([3, 1, 2, 5, 2]);
+// ```
+
+// We want each number at its correct index:
+
+// ```text
+// 1 → index 0
+// 2 → index 1
+// 3 → index 2
+// 4 → index 3
+// 5 → index 4
+// ```
+
+// Initial array:
+
+// ```text
+// [3, 1, 2, 5, 2]
+// ```
+
+// ## Step 1
+
+// ```text
+// i = 0
+// nums[i] = 3
+// ```
+
+// Correct index of `3`:
+
+// ```javascript
+// correctIndex = 3 - 1 = 2;
+// ```
+
+// Compare:
+
+// ```text
+// nums[0] = 3
+// nums[2] = 2
+// ```
+
+// They are different, so swap them:
+
+// ```text
+// [2, 1, 3, 5, 2]
+// ```
+
+// We do not increase `i` yet because the new value at index `0` still needs checking.
+
+// ---
+
+// ## Step 2
+
+// ```text
+// i = 0
+// nums[i] = 2
+// ```
+
+// Correct index of `2`:
+
+// ```javascript
+// correctIndex = 2 - 1 = 1;
+// ```
+
+// Compare:
+
+// ```text
+// nums[0] = 2
+// nums[1] = 1
+// ```
+
+// Swap:
+
+// ```text
+// [1, 2, 3, 5, 2]
+// ```
+
+// ---
+
+// ## Step 3
+
+// ```text
+// i = 0
+// nums[i] = 1
+// ```
+
+// Correct index:
+
+// ```javascript
+// correctIndex = 1 - 1 = 0;
+// ```
+
+// Now:
+
+// ```text
+// nums[0] === nums[0]
+// 1 === 1
+// ```
+
+// The number is in its correct position, so:
+
+// ```javascript
+// i++;
+// ```
+
+// Now `i = 1`.
+
+// ---
+
+// ## Step 4
+
+// At index `1`:
+
+// ```text
+// nums[1] = 2
+// correctIndex = 1
+// ```
+
+// `2` is already in its correct position, so move forward.
+
+// ```text
+// i = 2
+// ```
+
+// At index `2`:
+
+// ```text
+// nums[2] = 3
+// correctIndex = 2
+// ```
+
+// Correct position again.
+
+// ```text
+// i = 3
+// ```
+
+// ---
+
+// ## Step 5
+
+// ```text
+// i = 3
+// nums[3] = 5
+// ```
+
+// Correct index of `5`:
+
+// ```javascript
+// correctIndex = 5 - 1 = 4;
+// ```
+
+// Compare:
+
+// ```text
+// nums[3] = 5
+// nums[4] = 2
+// ```
+
+// Swap:
+
+// ```text
 // [1, 2, 3, 2, 5]
+// ```
 
-// Now compare each value with what should be at that index:
+// Keep `i = 3` and check the new value there.
 
-// index 0 should contain 1 → correct
-// index 1 should contain 2 → correct
-// index 2 should contain 3 → correct
-// index 3 should contain 4 → contains 2
+// ---
 
-// So:
+// ## Step 6
 
+// ```text
+// i = 3
+// nums[3] = 2
+// ```
+
+// Correct index of `2`:
+
+// ```javascript
+// correctIndex = 2 - 1 = 1;
+// ```
+
+// Compare:
+
+// ```text
+// nums[3] = 2
+// nums[1] = 2
+// ```
+
+// They are equal.
+
+// This means another `2` is already at the correct position, so the current `2` is a duplicate. Swapping would do nothing, so move forward.
+
+// Final arranged array:
+
+// ```text
+// [1, 2, 3, 2, 5]
+// ```
+
+// ## Find the incorrect position
+
+// Now scan the array:
+
+// ```text
+// index 0 expects 1 → correct
+// index 1 expects 2 → correct
+// index 2 expects 3 → correct
+// index 3 expects 4 → contains 2
+// ```
+
+// At index `3`:
+
+// ```text
 // duplicate = nums[3] = 2
-// missing = index + 1 = 4
+// missing = i + 1 = 4
+// ```
 
-// That is why we return:
+// So the result is:
 
-// return [nums[i], i + 1];
+// ```javascript
+// [2, 4]
+// ```
 
-// The order is:
+// Meaning:
 
-// [duplicate, missing]
+// ```text
+// 2 is duplicated
+// 4 is missing
+// ```
+
