@@ -50,3 +50,89 @@
 
 // push() adds at the end
 // pop() removes from the end
+
+
+
+// stack using array: 
+// We add and remove from the end of the array. Avoid using shift() or unshift() for a stack because they require moving other elements and take O(n) time.
+class ArrayStack {
+    constructor() {
+      this.items = [];
+    }
+  
+    push(value) {
+      this.items.push(value);
+    }
+  
+    pop() {
+      if (this.isEmpty()) {
+        return undefined;
+      }
+  
+      return this.items.pop();
+    }
+  
+    peek() {
+      if (this.isEmpty()) {
+        return undefined;
+      }
+  
+      return this.items[this.items.length - 1];
+    }
+  
+    isEmpty() {
+      return this.items.length === 0;
+    }
+  
+    size() {
+      return this.items.length;
+    }
+}
+
+
+
+// stack using Linked List:
+
+class StackNode {
+    constructor(value) {
+      this.value = value;
+      this.next = null;
+    }
+}
+class LinkedListStack {
+    constructor(value) {
+        this.length = 0;
+        this.top = null;
+    }
+
+    push(value) {
+        let newNode = new StackNode(value);
+        newNode.next = this.top;
+        this.top = newNode;
+        this.length++;
+    }
+
+    pop() {
+        if (this.isEmpty()) {
+            return undefined;
+        }
+        this.top = this.top.next;
+        this.length--;
+        return this.top.value;
+    }
+
+    peek() {
+        if (this.isEmpty()) {
+            return undefined;
+        }
+        return this.top.value;
+    }
+
+    isEmpty() {
+        return this.top === null;
+    }
+
+    size() {
+        return this.length;
+    }
+}
