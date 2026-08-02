@@ -1,0 +1,1 @@
+A Hashtable (also known as Hash Map) is a data structure that stores key-value pairs and allows fast lookups, insertions, and deletions. It is an essential tool in programming for efficiently managing and retrieving data.
