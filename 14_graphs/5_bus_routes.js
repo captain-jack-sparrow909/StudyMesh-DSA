@@ -149,3 +149,68 @@ function numBusesToDestination(routes, source, target) {
 // busesTaken++;
 
 // happens once per BFS level.
+
+
+
+
+// of this routes is the 1, 2, 7, 3, 6 the number for bus or bus stop ?
+
+// 1, 2, 7, 3, 6 are bus stop numbers, not bus numbers.
+
+// In:
+
+// const routes = [
+//   [1, 2, 7],
+//   [3, 6, 7]
+// ];
+
+// the index of each inner array is the bus number:
+
+// routes[0] = [1, 2, 7]
+// Bus 0 visits stops 1, 2, and 7
+
+// routes[1] = [3, 6, 7]
+// Bus 1 visits stops 3, 6, and 7
+
+// So you can read it as:
+
+// Bus 0: 1 → 2 → 7 → 1 → 2 → 7 ...
+
+// Bus 1: 3 → 6 → 7 → 3 → 6 → 7 ...
+
+// The common stop is 7, so you can transfer buses there:
+
+// Bus 0 reaches stop 7
+//         ↓
+// switch buses
+//         ↓
+// Bus 1 also visits stop 7
+
+// So if:
+
+// source = 1;
+// target = 6;
+
+// you travel:
+
+// Stop 1
+//   ↓ take Bus 0
+// Stop 7
+//   ↓ switch to Bus 1
+// Stop 6
+
+// You took 2 buses.
+
+// A simple rule:
+
+// routes[index]  → bus number
+
+// values inside routes[index] → bus stop numbers
+
+// So:
+
+// routes[0] // Bus 0
+
+// and:
+
+// routes[0][1] // stop 2
