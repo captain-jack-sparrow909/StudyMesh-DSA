@@ -112,3 +112,82 @@
 // Return: 2
 
 
+function search(nums, key) {
+    let start = 0;
+    let end = nums.length - 1;
+  
+    // Find out whether the array is ascending
+    const isAscending = nums[start] <= nums[end];
+  
+    while (start <= end) {
+      const mid = Math.floor((start + end) / 2);
+  
+      // Found it
+      if (nums[mid] === key) {
+        return mid;
+      }
+  
+      if (isAscending) {
+        // Ascending order
+        if (key < nums[mid]) {
+          end = mid - 1;
+        } else {
+          start = mid + 1;
+        }
+      } else {
+        // Descending order
+        if (key < nums[mid]) {
+          start = mid + 1;
+        } else {
+          end = mid - 1;
+        }
+      }
+    }
+  
+    return -1;
+}
+
+
+// The important difference
+
+// For ascending:
+
+// [2, 4, 6, 8, 10]
+
+// If:
+
+// key < nums[mid]
+
+// go left.
+
+// If:
+
+// key > nums[mid]
+
+// go right.
+
+// For descending:
+
+// [10, 8, 6, 4, 2]
+
+// it's reversed.
+
+// If:
+
+// key < nums[mid]
+
+// go right.
+
+// If:
+
+// key > nums[mid]
+
+// go left.
+
+// So the easiest thing to remember is:
+
+// Ascending → smaller = left, bigger = right.
+// Descending → smaller = right, bigger = left.
+
+// And duplicates are okay because we only need to find an index where the key exists.
+
