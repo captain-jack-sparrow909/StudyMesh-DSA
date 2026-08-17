@@ -10,3 +10,48 @@
 
 
 // solution:
+// Let's make Ceiling of a Number very simple.
+
+// What does "ceiling" mean?
+
+// The ceiling is:
+
+// The smallest number in the array that is ≥ key.
+
+// Example:
+
+// [4, 6, 10]
+
+// If:
+
+// key = 6
+
+// 6 itself is allowed because:
+
+// 6 >= 6
+
+// So answer is:
+
+// 6 → index 1
+// Another example
+// [4, 6, 10]
+// key = 7
+
+// Numbers ≥ 7 are:
+
+// 10
+
+// So ceiling is 10, index 2.
+
+// Another example
+// [4, 6, 10]
+// key = 5
+
+// Numbers ≥ 5 are:
+
+// 6, 10
+
+// The smallest one is 6.
+
+// So answer: index 1
+
