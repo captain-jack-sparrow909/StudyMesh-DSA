@@ -96,3 +96,61 @@
 
 // That's the last occurrence.
 
+function findRange(nums, key) {
+    const first = findFirst(nums, key);
+  
+    // Key doesn't exist
+    if (first === -1) {
+      return [-1, -1];
+    }
+  
+    const last = findLast(nums, key);
+  
+    return [first, last];
+}
+
+function findFirst(nums, key) {
+    let start = 0;
+    let end = nums.length - 1;
+    let index = -1;
+  
+    while (start <= end) {
+      const mid = Math.floor((start + end) / 2);
+  
+      if (nums[mid] === key) {
+        index = mid;
+  
+        // Found key, but search further LEFT
+        end = mid - 1;
+      } else if (nums[mid] < key) {
+        start = mid + 1;
+      } else {
+        end = mid - 1;
+      }
+    }
+  
+    return index;
+}
+
+function findLast(nums, key) {
+    let start = 0;
+    let end = nums.length - 1;
+    let index = -1;
+  
+    while (start <= end) {
+      const mid = Math.floor((start + end) / 2);
+  
+      if (nums[mid] === key) {
+        index = mid;
+  
+        // Found key, but search further RIGHT
+        start = mid + 1;
+      } else if (nums[mid] < key) {
+        start = mid + 1;
+      } else {
+        end = mid - 1;
+      }
+    }
+  
+    return index;
+}
