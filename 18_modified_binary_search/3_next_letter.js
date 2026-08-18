@@ -41,3 +41,21 @@
 
 // Answer = h.
 
+function searchNextLetter(letters, key) {
+    let start = 0;
+    let end = letters.length - 1;
+  
+    while (start <= end) {
+      const mid = Math.floor((start + end) / 2);
+  
+      if (letters[mid] <= key) {
+        // Current letter is too small OR equal
+        start = mid + 1;
+      } else {
+        // Current letter is greater than key
+        end = mid - 1;
+      }
+    }
+  
+    return letters[start % letters.length];
+}
