@@ -10,3 +10,34 @@
 
 
 // solution:
+// This is very similar to Ceiling of a Number, but there is one important difference:
+
+// We need the smallest letter strictly greater than the key.
+
+// For:
+
+// ['a', 'c', 'f', 'h']
+// key = 'f'
+
+// We want:
+
+// 'h'
+
+// We cannot return f because it must be greater than f.
+
+// Step 1: Think about the array
+// index:  0   1   2   3
+//         a   c   f   h
+
+// We want the first letter that is:
+
+// > key
+
+// For key = 'f':
+
+// a   c   f   h
+//             ↑
+//            > f
+
+// Answer = h.
+
