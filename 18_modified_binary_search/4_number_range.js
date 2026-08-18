@@ -154,3 +154,100 @@ function findLast(nums, key) {
   
     return index;
 }
+
+
+
+
+
+// Let's trace [4, 6, 6, 6, 9]
+// Find first 6
+
+// Suppose we find:
+
+// mid = 2
+// nums[2] = 6
+
+// We found it:
+
+// index = 2;
+
+// But maybe there is another 6 on the left.
+
+// So:
+
+// end = mid - 1;
+
+// Now:
+
+// start = 0
+// end = 1
+
+// Search again and find:
+
+// index = 1
+
+// Now there is nothing further left.
+
+// So:
+
+// first = 1
+// Find last 6
+
+// Again we might initially find:
+
+// mid = 2
+// nums[2] = 6
+
+// But maybe there is another 6 on the right.
+
+// So:
+
+// start = mid + 1;
+
+// Now we search the right side and find:
+
+// index = 3
+
+// So:
+
+// last = 3
+
+// Final:
+
+// [1, 3]
+// The important trick
+
+// This is the part to remember:
+
+// Finding FIRST
+// if (nums[mid] === key) {
+//     index = mid;
+//     end = mid - 1;  // keep going LEFT
+// }
+// Finding LAST
+// if (nums[mid] === key) {
+//     index = mid;
+//     start = mid + 1;  // keep going RIGHT
+// }
+
+// That's really the entire difference.
+
+// Why do we need index = -1?
+
+// Suppose:
+
+// [1, 3, 8, 10, 15]
+// key = 12
+
+// We never find 12.
+
+// So index stays:
+
+// -1
+
+// and we return:
+
+// [-1, -1]
+// One sentence to remember
+
+// Normal binary search stops when it finds the key; range search finds the key but keeps searching left for the first occurrence and right for the last occurrence.
