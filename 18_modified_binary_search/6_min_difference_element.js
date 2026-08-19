@@ -11,3 +11,31 @@
 // Output: 4
 
 // solution:
+// This is another Binary Search problem.
+
+// The main idea is:
+
+// Find the position where key would be inserted, then compare the numbers on the left and right.
+
+// Example
+// [4, 6, 10]
+// key = 7
+
+// 7 would belong between 6 and 10:
+
+// 4   6   |   10
+//         ↑
+//         7
+
+// So we only need to compare:
+
+// 6 and 10
+
+// Differences:
+
+// |7 - 6| = 1
+// |7 - 10| = 3
+
+// Therefore:
+
+// answer = 6
