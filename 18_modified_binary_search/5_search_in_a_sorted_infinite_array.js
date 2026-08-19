@@ -163,3 +163,178 @@ function searchInfiniteArray(reader, key) {
   
     return -1;
 }
+
+
+
+
+// But what is reader.get()?
+
+// The problem gives us an object that can access the array:
+
+// reader.get(index)
+
+// For example:
+
+// reader.get(0) → 1
+// reader.get(1) → 3
+// reader.get(2) → 5
+// reader.get(3) → 7
+
+// If we ask for an index outside the actual array:
+
+// reader.get(100)
+
+// it returns:
+
+// Integer.MAX_VALUE
+
+// This is basically telling us:
+
+// "There is no element here."
+
+// So we don't need to know the array's length.
+
+// Why do we double end?
+
+// This is the most important part:
+
+// end = end * 2;
+
+// We do:
+
+// 1
+// 2
+// 4
+// 8
+// 16
+// 32
+// 64
+// ...
+
+// Instead of checking:
+
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+// 7
+// 8
+// ...
+
+// We're jumping farther and farther.
+
+// This is what makes the algorithm efficient.
+
+// Let's trace a simple example
+
+// Suppose:
+
+// array = [1, 3, 5, 7, 9, 11, 13, 15]
+// key = 7
+
+// Initially:
+
+// start = 0
+// end = 1
+
+// Check:
+
+// reader.get(1) = 3
+
+// Since:
+
+// 3 < 7
+
+// expand:
+
+// start = 2
+// end = 2
+
+// Check:
+
+// reader.get(2) = 5
+
+// Since:
+
+// 5 < 7
+
+// expand:
+
+// start = 3
+// end = 4
+
+// Now we have:
+
+// [7, 9]
+//  ↑
+// possible range
+
+// Binary search:
+
+// start = 3
+// end = 4
+
+// mid = 3
+// reader.get(3) = 7
+
+// Found!
+
+// return 3;
+// What if the key doesn't exist?
+
+// Suppose:
+
+// key = 8
+
+// Eventually we might get:
+
+// start = 3
+// end = 4
+
+// Values:
+
+// 7, 9
+
+// Binary search:
+
+// 7 < 8
+
+// go right.
+
+// Then:
+
+// 9 > 8
+
+// go left.
+
+// Eventually:
+
+// start > end
+
+// So:
+
+// return -1;
+// Remember the whole problem like this
+
+// There are 2 phases:
+
+// PHASE 1
+// Find a range
+//     ↓
+// 1 → 2 → 4 → 8 → 16...
+//     ↓
+// key is somewhere inside this range
+
+
+// PHASE 2
+// Normal Binary Search
+//     ↓
+// find the key
+
+// So the main thing to remember is:
+
+// We don't know the array's size, so first keep doubling the range until the key can fit inside it. Then perform normal binary search.
+
+// And that's why we don't use nums.length in this problem.
