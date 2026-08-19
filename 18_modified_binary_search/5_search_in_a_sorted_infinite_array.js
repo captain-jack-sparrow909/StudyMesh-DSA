@@ -135,4 +135,31 @@
 
 // go left.
 
-
+function searchInfiniteArray(reader, key) {
+    // Step 1: Find a range where key could exist
+    let start = 0;
+    let end = 1;
+  
+    while (reader.get(end) < key) {
+      start = end + 1;
+      end = end * 2;
+    }
+  
+    // Step 2: Normal binary search
+    while (start <= end) {
+      const mid = Math.floor((start + end) / 2);
+      const value = reader.get(mid);
+  
+      if (value === key) {
+        return mid;
+      }
+  
+      if (value < key) {
+        start = mid + 1;
+      } else {
+        end = mid - 1;
+      }
+    }
+  
+    return -1;
+}
