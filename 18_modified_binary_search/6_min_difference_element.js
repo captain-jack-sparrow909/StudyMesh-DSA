@@ -222,3 +222,85 @@ function searchMinDiffElement(nums, key) {
 // Math.abs(7 - 10) // 3
 
 // In short: Binary Search gets us close; then we compare the two neighbors to find which one is actually closest.
+
+
+
+
+
+// why was left assigned to end and right assigned to start ?
+
+// Because when the binary search finishes, start and end cross each other.
+
+// For an ascending array, they end up like this:
+
+// [4, 6, 10]
+//     ↑   ↑
+//    end start
+
+// For key = 7:
+
+// 6 < 7 < 10
+
+// So:
+
+// const left = nums[end];    // 6
+// const right = nums[start]; // 10
+// Why exactly?
+
+// During binary search:
+
+// If the middle number is too small:
+
+// nums[mid] < key
+
+// we move start to the right:
+
+// start = mid + 1;
+
+// So eventually start becomes the first number bigger than the key.
+
+// If the middle number is too big:
+
+// nums[mid] > key
+
+// we move end to the left:
+
+// end = mid - 1;
+
+// So eventually end becomes the last number smaller than the key.
+
+// Therefore, at the end:
+
+//        smaller     bigger
+//           ↓          ↓
+// [4, 6, 10]
+//     ↑      ↑
+//    end    start
+
+//        6 < 7 < 10
+
+// So:
+
+// const left = nums[end];    // 6
+// const right = nums[start]; // 10
+
+// And these are the only two numbers we need to compare.
+
+// Math.abs(7 - 6)  // 1
+// Math.abs(7 - 10) // 3
+
+// Therefore 6 is the answer.
+
+// Easy way to remember
+
+// After binary search:
+
+// end   = number just BEFORE the key
+// start = number just AFTER the key
+
+// So:
+
+// left  = nums[end];
+// right = nums[start];
+
+// We're calling them left and right because end is sitting on the left side of the key, while start is sitting on the right side.
