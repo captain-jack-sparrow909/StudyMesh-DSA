@@ -68,3 +68,191 @@ function countRotations(nums) {
   
     return start;
 }
+
+
+// Why compare nums[mid] with nums[end]?
+
+// This is the important part.
+
+// Suppose:
+
+// [10, 15, 1, 3, 8]
+
+// We have:
+
+// start = 0
+// end = 4
+// mid = 2
+// nums[mid] = 1
+// nums[end] = 8
+
+// Compare:
+
+// 1 > 8 ❌
+
+// So we know the minimum is at mid or somewhere to the left.
+
+// Therefore:
+
+// end = mid;
+// What if nums[mid] > nums[end]?
+
+// For example:
+
+// [10, 15, 1, 3, 8]
+//  ↑       ↑       ↑
+// start   mid     end
+
+// Imagine mid were 15:
+
+// 15 > 8
+
+// This tells us something important:
+
+// [10, 15]   [1, 3, 8]
+//  ↑           ↑
+//  bigger      smaller
+
+// The minimum must be to the right of mid.
+
+// So:
+
+// start = mid + 1;
+// Let's trace the example
+// [10, 15, 1, 3, 8]
+
+// Initially:
+
+// start = 0
+// end = 4
+// Step 1
+// mid = 2
+
+// nums[mid] = 1
+// nums[end] = 8
+// 1 > 8 ❌
+
+// So:
+
+// end = mid;
+
+// Now:
+
+// start = 0
+// end = 2
+// Step 2
+// mid = 1
+
+// nums[mid] = 15
+// nums[end] = 1
+// 15 > 1 ✅
+
+// Therefore minimum must be right of mid:
+
+// start = mid + 1;
+
+// Now:
+
+// start = 2
+// end = 2
+
+// We're done.
+
+// The minimum is at:
+
+// index 2
+
+// Therefore:
+
+// rotations = 2
+// Example 2
+// [4, 5, 7, 9, 10, -1, 2]
+
+// The minimum is:
+
+// [4, 5, 7, 9, 10, -1, 2]
+//                   ↑
+//                  -1
+
+// Its index is:
+
+// 5
+
+// Therefore:
+
+// rotations = 5
+// Why does minimum index equal rotations?
+
+// Think about rotating the original array:
+
+// Original:
+
+// [1, 3, 8, 10, 15]
+
+// After 1 rotation:
+
+// [15, 1, 3, 8, 10]
+//     ↑
+//    min at index 1
+
+// After 2:
+
+// [10, 15, 1, 3, 8]
+//          ↑
+//         min at index 2
+
+// After 3:
+
+// [8, 10, 15, 1, 3]
+//              ↑
+//             min at index 3
+
+// So:
+
+// 1 rotation → minimum at index 1
+// 2 rotations → minimum at index 2
+// 3 rotations → minimum at index 3
+
+// That's the key observation.
+
+// The two cases to remember
+// if (nums[mid] > nums[end]) {
+//     start = mid + 1;
+// }
+
+// Means:
+
+// mid is in the bigger/left portion → minimum is right.
+
+// Otherwise:
+
+// else {
+//     end = mid;
+// }
+
+// Means:
+
+// mid could be the minimum → keep mid and search left.
+
+// We use:
+
+// end = mid;
+
+// and not:
+
+// end = mid - 1;
+
+// because mid itself might be the smallest element.
+
+// Final mental model
+// [10, 15 | 1, 3, 8]
+//           ↑
+//         minimum
+//           ↑
+//        index = rotations
+
+// So this problem is simply:
+
+// Find the minimum element's index using Binary Search. That index is the rotation count.
+
+// Time complexity: O(log n).
