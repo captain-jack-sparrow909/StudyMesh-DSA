@@ -74,3 +74,24 @@
 
 // Why? Because mid itself could be the peak.
 
+
+function findMaximum(nums) {
+    let start = 0;
+    let end = nums.length - 1;
+  
+    while (start < end) {
+      const mid = Math.floor((start + end) / 2);
+  
+      if (nums[mid] < nums[mid + 1]) {
+        // We are going UP
+        // Peak is on the right
+        start = mid + 1;
+      } else {
+        // We are going DOWN
+        // Peak is at mid or on the left
+        end = mid;
+      }
+    }
+  
+    return nums[start];
+}
