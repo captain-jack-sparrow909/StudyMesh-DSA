@@ -49,3 +49,22 @@
 // So our real job is:
 
 // Find the index of the minimum element using Binary Search.
+
+function countRotations(nums) {
+    let start = 0;
+    let end = nums.length - 1;
+  
+    while (start < end) {
+      const mid = Math.floor((start + end) / 2);
+  
+      if (nums[mid] > nums[end]) {
+        // Minimum is on the RIGHT
+        start = mid + 1;
+      } else {
+        // Minimum is at mid or on the LEFT
+        end = mid;
+      }
+    }
+  
+    return start;
+}
