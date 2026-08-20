@@ -113,4 +113,51 @@ function findPeak(nums) {
       nums.length - 1
     );
   }
+
+
+//   The easiest way to remember it
+
+//   Think of the Bitonic array as two separate sorted arrays:
   
+//           peak
+//             ↓
+//   [1, 3, 8, 12] [8, 5, 2]
+//    ↑ increasing    decreasing ↑
+  
+//   So:
+  
+//                Bitonic
+//                   ↓
+//           ┌───────┴───────┐
+//           ↓               ↓
+//      Increasing       Decreasing
+//           ↓               ↓
+//     normal search    reversed search
+  
+//   And because the question says:
+  
+//   "If the key appears more than once, return the smaller index."
+  
+//   we always search the left/increasing part first.
+  
+//   One thing to memorize
+//   Find peak
+//      ↓
+//   Search LEFT first
+//      ↓
+//   Found? → return it
+//      ↓
+//   Not found?
+//      ↓
+//   Search RIGHT
+  
+//   For:
+  
+//   [1, 3, 8, 12, 8, 5, 2]
+  
+//   and key = 8:
+  
+//   left search  → index 2 ✅
+//   right search → index 4
+  
+//   We return 2 because we searched the left side first.
