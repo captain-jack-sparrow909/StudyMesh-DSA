@@ -95,3 +95,131 @@ function findMaximum(nums) {
   
     return nums[start];
 }
+
+
+// Let's walk through the example
+// [1, 3, 8, 12, 4, 2]
+
+// Initially:
+
+// start = 0
+// end = 5
+// Step 1
+// mid = 2
+
+// So:
+
+// nums[mid] = 8
+// nums[mid + 1] = 12
+
+// Compare:
+
+// 8 < 12
+
+// We're going up.
+
+// Therefore:
+
+// start = mid + 1;
+
+// Now:
+
+// start = 3
+// end = 5
+// Step 2
+// mid = 4
+
+// Compare:
+
+// nums[4] = 4
+// nums[5] = 2
+// 4 < 2 ❌
+
+// We're going down.
+
+// So the peak is at mid or before it:
+
+// end = mid;
+
+// Now:
+
+// start = 3
+// end = 4
+// Step 3
+// mid = 3
+
+// Compare:
+
+// nums[3] = 12
+// nums[4] = 4
+
+// We're going down again:
+
+// end = mid;
+
+// Now:
+
+// start = 3
+// end = 3
+
+// The loop stops.
+
+// So:
+
+// return nums[start];
+
+// gives:
+
+// nums[3] = 12
+// The one thing to remember
+
+// At every step, ask:
+
+// Am I going UP or DOWN?
+
+// nums[mid] < nums[mid + 1]
+//         ↓
+//       going UP
+//         ↓
+//    peak is RIGHT
+//         ↓
+// start = mid + 1
+
+// And:
+
+// nums[mid] > nums[mid + 1]
+//         ↓
+//      going DOWN
+//         ↓
+//  peak is LEFT or mid
+//         ↓
+//    end = mid
+// Why while (start < end)?
+
+// Because we use:
+
+// nums[mid + 1]
+
+// We need to make sure mid + 1 is a valid position.
+
+// When:
+
+// start === end
+
+// we have narrowed it down to one element, which must be the peak.
+
+// So simply return:
+
+// nums[start]
+
+// Mental model:
+
+//           peak
+//            ↓
+// 1 → 3 → 8 → 12 → 4 → 2
+//           ↗      ↘
+
+// If going UP → move right
+// If going DOWN → move left
+
+// That's the entire trick.
