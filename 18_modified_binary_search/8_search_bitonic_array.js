@@ -39,3 +39,78 @@
 
 // not 4.
 
+function findPeak(nums) {
+    let start = 0;
+    let end = nums.length - 1;
+  
+    while (start < end) {
+      const mid = Math.floor((start + end) / 2);
+  
+      if (nums[mid] < nums[mid + 1]) {
+        start = mid + 1;
+      } else {
+        end = mid;
+      }
+    }
+  
+    return start;
+  }
+  
+  function binarySearchAscending(nums, key, start, end) {
+    while (start <= end) {
+      const mid = Math.floor((start + end) / 2);
+  
+      if (nums[mid] === key) {
+        return mid;
+      }
+  
+      if (nums[mid] < key) {
+        start = mid + 1;
+      } else {
+        end = mid - 1;
+      }
+    }
+  
+    return -1;
+  }
+  
+  function binarySearchDescending(nums, key, start, end) {
+    while (start <= end) {
+      const mid = Math.floor((start + end) / 2);
+  
+      if (nums[mid] === key) {
+        return mid;
+      }
+  
+      if (nums[mid] < key) {
+        end = mid - 1;
+      } else {
+        start = mid + 1;
+      }
+    }
+  
+    return -1;
+  }
+  
+  function searchBitonicArray(nums, key) {
+    const peak = findPeak(nums);
+  
+    const leftResult = binarySearchAscending(
+      nums,
+      key,
+      0,
+      peak
+    );
+  
+    if (leftResult !== -1) {
+      return leftResult;
+    }
+  
+    return binarySearchDescending(
+      nums,
+      key,
+      peak + 1,
+      nums.length - 1
+    );
+  }
+  
