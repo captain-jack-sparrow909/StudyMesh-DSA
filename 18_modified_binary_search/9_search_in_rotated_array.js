@@ -251,3 +251,102 @@ function searchRotatedArray(nums, key) {
 // O(log n)
 
 // just like normal Binary Search.
+
+
+
+
+
+
+
+// nums[start] <= key && key < nums[mid]
+
+// why we've <= one and just < at other point
+
+// Yes — this is about whether the boundary itself can be the key.
+
+// The condition is:
+
+// nums[start] <= key && key < nums[mid]
+
+// Let's break it into two parts.
+
+// 1. Why nums[start] <= key?
+
+// Because start can contain the key.
+
+// Example:
+
+// [10, 15, 1, 3, 8]
+//  ↑       ↑
+// start   mid
+
+// Suppose:
+
+// key = 10
+
+// Then:
+
+// nums[start] = 10
+
+// We do want to include start.
+
+// So we use:
+
+// nums[start] <= key
+
+// If we used:
+
+// nums[start] < key
+
+// then 10 would fail the condition even though 10 is exactly at start.
+
+// 2. Why key < nums[mid]?
+
+// Because we already checked whether mid is the key:
+
+// if (nums[mid] === key) {
+//     return mid;
+// }
+
+// So by the time we reach:
+
+// key < nums[mid]
+
+// we already know:
+
+// key !== nums[mid]
+
+// Therefore, we don't need <=.
+
+// Think of the range like this
+
+// We're asking:
+
+// Is the key between start and mid?
+
+// The range is:
+
+// [start ---------------- mid)
+//    ↑                    ↑
+//  included             excluded
+
+// So mathematically:
+
+// nums[start] <= key < nums[mid]
+
+// That's exactly why the operators are different.
+
+// Easy rule to remember
+// nums[start] <= key
+
+// start is included, so <=.
+
+// key < nums[mid]
+
+// mid is already checked separately, so just <.
+
+// And you'll see the same idea on the other side:
+
+// nums[mid] < key && key <= nums[end]
+
+// Here mid is excluded because we already checked it, while end is included because end could contain the key.
