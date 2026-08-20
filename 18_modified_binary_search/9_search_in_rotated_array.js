@@ -161,3 +161,42 @@
 // Otherwise → search left:
 
 // end = mid - 1;
+
+
+function searchRotatedArray(nums, key) {
+    let start = 0;
+    let end = nums.length - 1;
+  
+    while (start <= end) {
+      const mid = Math.floor((start + end) / 2);
+  
+      // Found the key
+      if (nums[mid] === key) {
+        return mid;
+      }
+  
+      // Left half is sorted
+      if (nums[start] <= nums[mid]) {
+  
+        // Is key inside the sorted left half?
+        if (nums[start] <= key && key < nums[mid]) {
+          end = mid - 1;
+        } else {
+          start = mid + 1;
+        }
+  
+      // Right half is sorted
+      } else {
+  
+        // Is key inside the sorted right half?
+        if (nums[mid] < key && key <= nums[end]) {
+          start = mid + 1;
+        } else {
+          end = mid - 1;
+        }
+      }
+    }
+  
+    return -1;
+}
+
