@@ -17,3 +17,35 @@
 
 
 // solution:
+// This is actually very similar to Search in Rotated Array.
+
+// The key idea is:
+
+// The number of rotations = the index of the smallest element.
+
+// Why?
+
+// Start with a sorted array:
+
+// [1, 3, 8, 10, 15]
+
+// Rotate it 2 times:
+
+// [10, 15, 1, 3, 8]
+
+// Notice where the smallest number 1 ended up:
+
+// index:  0   1   2   3   4
+//         10  15  1   3   8
+//                 ↑
+//               minimum
+
+// Its index is 2.
+
+// Therefore:
+
+// rotations = 2
+
+// So our real job is:
+
+// Find the index of the minimum element using Binary Search.
