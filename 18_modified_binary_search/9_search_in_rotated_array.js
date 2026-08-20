@@ -200,3 +200,54 @@ function searchRotatedArray(nums, key) {
     return -1;
 }
 
+
+
+
+// The easiest way to remember it
+
+// Don't try to understand the whole code at once.
+
+// Every time:
+
+//         mid
+//          ↓
+// [ ? ? ? ? ? ? ? ]
+
+// Ask:
+
+// 1. Which side is sorted?
+// nums[start] <= nums[mid]
+
+// → left is sorted
+
+// Otherwise:
+
+// → right is sorted
+
+// 2. Is the key inside that sorted side?
+
+// If yes → search that side.
+
+// If no → search the other side.
+
+// Mental picture
+// Normal sorted:
+
+// 1 → 3 → 8 → 10 → 15
+
+
+// Rotated:
+
+// 10 → 15 → 1 → 3 → 8
+//          ↑
+//        rotation
+
+// Even though the whole array isn't sorted, one of the two halves around mid will always be sorted.
+
+// That's what lets us throw away half the array every time.
+
+// So the time complexity is:
+
+// O(log n)
+
+// just like normal Binary Search.
