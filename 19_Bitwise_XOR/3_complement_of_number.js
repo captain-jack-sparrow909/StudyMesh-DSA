@@ -227,3 +227,59 @@ function bitwiseComplement(num) {
 
 // Time complexity: O(log N)
 // Space complexity: O(1).
+
+
+
+
+// do I have to call this function with binary values eg: 1100 or decimal ?
+
+// You should call bitwiseComplement() with a decimal number, because that's what the problem gives you.
+
+// For example:
+
+// bitwiseComplement(8)
+
+// Here:
+
+// 8 in decimal
+// ↓
+// 1000 in binary
+// ↓
+// 0111
+// ↓
+// 7
+
+// So the answer is 7.
+
+// Important in JavaScript
+
+// If you write:
+
+// bitwiseComplement(1100)
+
+// JavaScript treats 1100 as decimal 1100, NOT binary 1100.
+
+// If you specifically want to write binary in JavaScript, use 0b:
+
+// bitwiseComplement(0b1100)
+
+// Here:
+
+// 0b1100 = decimal 12
+
+// and the function will calculate:
+
+// 1100
+// ↓
+// 0011
+// ↓
+// 3
+
+// So:
+
+// bitwiseComplement(0b1100); // 3
+// bitwiseComplement(12);     // 3
+
+// They are exactly the same input to the function.
+
+// For these LeetCode/DSA problems, just use the decimal input they give you. The bitwise operations inside the function automatically work with its binary representation.
