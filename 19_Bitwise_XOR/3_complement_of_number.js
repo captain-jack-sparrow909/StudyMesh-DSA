@@ -104,3 +104,17 @@
 // ^1111
 // -----
 // 0111
+
+
+function bitwiseComplement(num) {
+    let n = num;
+    let mask = 0;
+  
+    while (n > 0) {
+      mask = (mask << 1) | 1;
+      n = n >> 1;
+    }
+  
+    return num ^ mask;
+}
+
