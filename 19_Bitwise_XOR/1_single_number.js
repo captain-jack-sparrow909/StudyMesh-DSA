@@ -50,3 +50,53 @@ function singleNumber(nums) {
   
     return result;
 }
+
+
+// Step by step
+
+// For:
+
+// [1, 4, 2, 1, 3, 2, 3]
+
+// result starts as:
+
+// 0
+
+// Then:
+
+// 0 ^ 1 = 1
+// 1 ^ 4 = 5
+// 5 ^ 2 = 7
+// 7 ^ 1 = 6
+// 6 ^ 3 = 5
+// 5 ^ 2 = 7
+// 7 ^ 3 = 4
+
+// Answer:
+
+// 4
+// Why does XOR cancel pairs?
+
+// XOR compares binary bits. For the same bits:
+
+// 1 ^ 1 = 0
+// 0 ^ 0 = 0
+
+// So a number XORed with itself becomes 0.
+
+// And because XOR can be rearranged:
+
+// 1 ^ 4 ^ 2 ^ 1 ^ 3 ^ 2 ^ 3
+
+// is effectively:
+
+// 1 ^ 1 ^ 2 ^ 2 ^ 3 ^ 3 ^ 4
+
+// All pairs become 0, leaving only 4.
+
+// Time: O(n)
+// Space: O(1)
+
+// The main thing to remember for this problem:
+
+// If every number appears twice except one, think XOR.
