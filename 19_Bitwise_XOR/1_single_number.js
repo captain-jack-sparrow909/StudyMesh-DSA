@@ -39,3 +39,14 @@
 // And finally:
 
 // 4
+
+
+function singleNumber(nums) {
+    let result = 0;
+  
+    for (let num of nums) {
+      result = result ^ num;
+    }
+  
+    return result;
+}
