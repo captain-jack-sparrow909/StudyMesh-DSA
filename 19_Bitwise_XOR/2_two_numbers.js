@@ -91,3 +91,31 @@
 // So the duplicates still cancel inside their own groups.
 
 
+function findTwoSingleNumbers(nums) {
+    // 1. XOR everything
+    let xor = 0;
+  
+    for (let num of nums) {
+      xor ^= num;
+    }
+  
+    // 2. Find a bit where the two single numbers are different
+    const mask = xor & -xor;
+  
+    // 3. Divide numbers into two groups
+    let num1 = 0;
+    let num2 = 0;
+  
+    for (let num of nums) {
+      if ((num & mask) === 0) {
+        num1 ^= num;
+      } else {
+        num2 ^= num;
+      }
+    }
+  
+    return [num1, num2];
+}
+
+
+
