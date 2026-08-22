@@ -134,3 +134,102 @@ function findKLargestNumbers(nums, k) {
     return minHeap.toArray();
 }
 
+
+// The important part is:
+
+// minHeap.push(num);
+
+// if (minHeap.size() > k) {
+//     minHeap.pop();
+// }
+
+// Think of it as:
+
+// Put the number in. If I now have too many, remove the smallest.
+
+// Why does this guarantee the K largest?
+
+// Suppose:
+
+// K = 3
+
+// Our heap currently contains:
+
+// [5, 11, 12]
+
+// Then we see:
+
+// 20
+
+// Add it:
+
+// [5, 11, 12, 20]
+
+// We have 4 numbers.
+
+// The smallest is 5, so remove it:
+
+// [11, 12, 20]
+
+// Now we still have exactly 3 numbers, and they are the 3 largest we've encountered.
+
+// Example 2
+// [5, 12, 11, -1, 12]
+// K = 3
+
+// Process:
+
+// 5       → [5]
+// 12      → [5,12]
+// 11      → [5,11,12]
+// -1      → [5,11,12,-1]
+//           remove -1
+//           [5,11,12]
+
+// 12      → [5,11,12,12]
+//           remove 5
+//           [11,12,12]
+
+// Final:
+
+// [11, 12, 12]
+
+// The problem's output:
+
+// [12, 11, 12]
+
+// has the same numbers; the order doesn't matter unless the problem explicitly requires sorted output.
+
+// The pattern to remember
+
+// For K largest:
+
+// K largest
+//     ↓
+// Min Heap
+//     ↓
+// Keep heap size = K
+//     ↓
+// If size > K
+//     ↓
+// remove minimum
+
+// For example:
+
+// nums = [3, 1, 5, 12, 2, 11]
+// K = 3
+
+//                  Min Heap
+//                     ↓
+//             ┌─────────────┐
+//             │ 5, 11, 12   │
+//             └─────────────┘
+//                     ↓
+//               3 largest
+
+// Time: O(n log K)
+// Space: O(K)
+
+// The important insight is not "K largest → Max Heap." It's actually:
+
+// K largest → Min Heap of size K, because we need quick access to the smallest number among our current K candidates.
