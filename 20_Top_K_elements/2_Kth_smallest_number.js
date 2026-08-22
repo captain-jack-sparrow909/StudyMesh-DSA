@@ -144,3 +144,57 @@ function findKthSmallest(nums, k) {
   
     return maxHeap.peek();
 }
+
+
+// Why Max Heap instead of Min Heap?
+
+// This is the most important part.
+
+// For K largest:
+
+// K largest
+//    ↓
+// Min Heap
+//    ↓
+// remove smallest
+
+// Because we want to get rid of numbers that are too small.
+
+// For K smallest:
+
+// K smallest
+//    ↓
+// Max Heap
+//    ↓
+// remove largest
+
+// Because we want to get rid of numbers that are too large.
+
+// Remember this table
+// Problem	Heap	Remove
+// K largest	Min Heap	Smallest
+// K smallest	Max Heap	Largest
+// Why does maxHeap.peek() give the answer?
+
+// At the end, the heap contains exactly the K smallest numbers.
+
+// For our example:
+
+// [1, 2, 5]
+
+// Since it's a Max Heap, the largest of these K numbers is at the top:
+
+//     5  ← peek()
+//    / \
+//   2   1
+
+// That largest number among the K smallest numbers is exactly the Kth smallest number.
+
+// So:
+
+// Kth smallest = largest among the K smallest
+
+// That's why we use a Max Heap.
+
+// Time: O(n log K)
+// Space: O(K)
