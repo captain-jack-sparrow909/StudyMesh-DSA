@@ -21,3 +21,31 @@
 // ```
 
 // solution:
+// This one is straightforward. We need to do two things to every row:
+
+// Flip → reverse the row.
+// Invert → change 0 → 1 and 1 → 0.
+// Example
+
+// First row:
+
+// [1, 0, 1]
+
+// Step 1: Flip
+
+// [1, 0, 1]
+//      ↓
+// [1, 0, 1]
+
+// It's the same because it's symmetric.
+
+// Step 2: Invert
+
+// [1, 0, 1]
+//  ↓  ↓  ↓
+// [0, 1, 0]
+
+// So the result is:
+
+// [0, 1, 0]
+
