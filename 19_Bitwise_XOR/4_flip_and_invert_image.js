@@ -61,3 +61,100 @@ function flipAndInvertImage(image) {
     return image;
 }
 
+// Let's walk through the example
+
+// Input:
+
+// [
+//   [1,0,1],
+//   [1,1,1],
+//   [0,1,1]
+// ]
+// Row 1
+// [1,0,1]
+
+// Flip:
+
+// [1,0,1]
+
+// Invert:
+
+// [0,1,0]
+// Row 2
+// [1,1,1]
+
+// Flip:
+
+// [1,1,1]
+
+// Invert:
+
+// [0,0,0]
+// Row 3
+// [0,1,1]
+
+// Flip:
+
+// [1,1,0]
+
+// Invert:
+
+// [0,0,1]
+
+// Final:
+
+// [
+//   [0,1,0],
+//   [0,0,0],
+//   [0,0,1]
+// ]
+// What does row.reverse() do?
+
+// If:
+
+// row = [0, 1, 1];
+
+// then:
+
+// row.reverse();
+
+// changes it to:
+
+// [1, 1, 0]
+
+// It reverses the same array.
+
+// What does this do?
+// row[i] = row[i] === 0 ? 1 : 0;
+
+// It's just a short if/else.
+
+// This:
+
+// if (row[i] === 0) {
+//   row[i] = 1;
+// } else {
+//   row[i] = 0;
+// }
+
+// is exactly the same.
+
+// So:
+
+// 0 → 1
+// 1 → 0
+// Easy way to remember
+// Each row
+//    ↓
+// reverse()
+//    ↓
+// [0,1,1] → [1,1,0]
+//    ↓
+// invert
+//    ↓
+// [0,0,1]
+
+// You don't need any complicated algorithm here.
+
+// Time: O(n²) because we visit every cell.
+// Space: O(1) extra space because we're modifying the image directly.
