@@ -113,5 +113,24 @@ class Heap {
   
       return top;
     }
+
+    toArray() {
+        return this.heap;
+    }
+}
+
+
+function findKLargestNumbers(nums, k) {
+    const minHeap = new MinHeap((a, b)=> a < b);
+  
+    for (let num of nums) {
+      minHeap.push(num);
+  
+      if (minHeap.size() > k) {
+        minHeap.pop();
+      }
+    }
+  
+    return minHeap.toArray();
 }
 
