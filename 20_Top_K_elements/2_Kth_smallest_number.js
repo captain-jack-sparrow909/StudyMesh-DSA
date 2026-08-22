@@ -131,3 +131,16 @@
 
 // 5
 
+function findKthSmallest(nums, k) {
+    const maxHeap = new MaxHeap();
+  
+    for (let num of nums) {
+      maxHeap.push(num);
+  
+      if (maxHeap.size() > k) {
+        maxHeap.pop();
+      }
+    }
+  
+    return maxHeap.peek();
+}
