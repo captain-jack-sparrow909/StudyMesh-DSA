@@ -120,3 +120,115 @@
 // Exactly what we want.
 
 
+class MaxHeap {
+    constructor() {
+      this.heap = [];
+    }
+  
+    size() {
+      return this.heap.length;
+    }
+  
+    push(point) {
+      this.heap.push(point);
+      this._heapifyUp();
+    }
+  
+    pop() {
+      if (this.heap.length === 0) {
+        return null;
+      }
+  
+      if (this.heap.length === 1) {
+        return this.heap.pop();
+      }
+  
+      const max = this.heap[0];
+  
+      this.heap[0] = this.heap.pop();
+  
+      this._heapifyDown();
+  
+      return max;
+    }
+  
+    peek() {
+      return this.heap[0];
+    }
+  
+    _heapifyUp() {
+      let index = this.heap.length - 1;
+  
+      while (index > 0) {
+        const parent = Math.floor((index - 1) / 2);
+  
+        if (
+          distance(this.heap[parent]) >=
+          distance(this.heap[index])
+        ) {
+          break;
+        }
+  
+        [this.heap[parent], this.heap[index]] =
+          [this.heap[index], this.heap[parent]];
+  
+        index = parent;
+      }
+    }
+  
+    _heapifyDown() {
+      let index = 0;
+  
+      while (true) {
+        const left = index * 2 + 1;
+        const right = index * 2 + 2;
+  
+        let largest = index;
+  
+        if (
+          left < this.heap.length &&
+          distance(this.heap[left]) >
+          distance(this.heap[largest])
+        ) {
+          largest = left;
+        }
+  
+        if (
+          right < this.heap.length &&
+          distance(this.heap[right]) >
+          distance(this.heap[largest])
+        ) {
+          largest = right;
+        }
+  
+        if (largest === index) {
+          break;
+        }
+  
+        [this.heap[index], this.heap[largest]] =
+          [this.heap[largest], this.heap[index]];
+  
+        index = largest;
+      }
+    }
+  }
+  
+  function distance(point) {
+    const [x, y] = point;
+  
+    return x * x + y * y;
+  }
+
+function kClosest(points, k) {
+    const maxHeap = new MaxHeap();
+  
+    for (let point of points) {
+      maxHeap.push(point);
+  
+      if (maxHeap.size() > k) {
+        maxHeap.pop();
+      }
+    }
+  
+    return maxHeap.heap;
+}
