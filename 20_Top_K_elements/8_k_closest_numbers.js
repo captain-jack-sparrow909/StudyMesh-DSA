@@ -17,3 +17,176 @@
 // ```
 
 // solution:
+// This one is a little different from the previous K Closest Points problem.
+
+// Here, because the array is already sorted, we can solve it without a heap.
+
+// The key idea is:
+
+// Find where X would be inserted, then expand left and right to pick the closest numbers.
+
+// Example 1
+// nums = [5, 6, 7, 8, 9]
+// K = 3
+// X = 7
+
+// We want 3 numbers closest to 7.
+
+// Start around 7:
+
+// 5   6   7   8   9
+//         ↑
+//         X
+
+// Compare numbers on both sides:
+
+// 6 → distance 1
+// 7 → distance 0
+// 8 → distance 1
+
+// So:
+
+// [6, 7, 8]
+// The important idea
+
+// Because the array is sorted, the closest numbers to X will be next to each other.
+
+// For example:
+
+// [2, 4, 5, 6, 9]
+
+// X = 6, K = 3
+
+// The answer must be a consecutive section:
+
+// [4, 5, 6]
+
+// It can't be:
+
+// [2, 6, 9]
+
+// because 4 and 5 are closer.
+
+// So the problem becomes:
+
+// Find the correct window of size K.
+
+// Step 1: Find the position of X
+
+// We can use binary search.
+
+// For:
+
+// [5, 6, 7, 8, 9]
+// X = 7
+
+// we find:
+
+// index = 2
+
+// But X doesn't necessarily exist.
+
+// For example:
+
+// [5, 6, 8, 9]
+// X = 7
+
+// 7 would belong between:
+
+// 6 and 8
+
+// So we need to know where X would be inserted.
+
+// Step 2: Use two pointers
+
+// Once we know the position, we have:
+
+// left
+// right
+
+// and compare:
+
+// Math.abs(nums[left] - X)
+
+// with:
+
+// Math.abs(nums[right] - X)
+
+// Whichever is closer, we take.
+
+// Example
+// [5, 6, 7, 8, 9]
+//       ↑
+//       X
+
+// Initially:
+
+// left = 1
+// right = 3
+
+// Compare:
+
+// 6 → distance 1
+// 8 → distance 1
+
+// They are equally close.
+
+// Usually for this problem, when equal, we choose the smaller number, so choose 6.
+
+// Then:
+
+// [6]
+
+// Next compare:
+
+// 5 → distance 2
+// 8 → distance 1
+
+// Choose 8.
+
+// Now:
+
+// [6, 8]
+
+// Next:
+
+// 7 → distance 0
+
+// Choose 7.
+
+// We have:
+
+// [6, 7, 8]
+// But there's an even simpler solution
+
+// Because the array is sorted, we can use a sliding window.
+
+// We need to find the best window of size K.
+
+// For:
+
+// [5, 6, 7, 8, 9]
+// K = 3
+// X = 7
+
+// Possible windows:
+
+// [5, 6, 7]
+// [6, 7, 8] ← best
+// [7, 8, 9]
+
+// Calculate how far the edges are from X.
+
+// For a window starting at i, compare:
+
+// X - nums[i]
+
+// with:
+
+// nums[i + K] - X
+
+// Why?
+
+// Because we're deciding:
+
+// Should I move the window left or right?
