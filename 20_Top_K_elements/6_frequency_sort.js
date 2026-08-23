@@ -118,3 +118,118 @@
 
 // "bbbaac"
 
+class MaxHeap {
+    constructor() {
+      this.heap = [];
+    }
+  
+    size() {
+      return this.heap.length;
+    }
+  
+    push(item) {
+      this.heap.push(item);
+      this.heapifyUp();
+    }
+  
+    pop() {
+      if (this.heap.length === 0) {
+        return null;
+      }
+  
+      if (this.heap.length === 1) {
+        return this.heap.pop();
+      }
+  
+      const max = this.heap[0];
+  
+      this.heap[0] = this.heap.pop();
+  
+      this.heapifyDown();
+  
+      return max;
+    }
+  
+    heapifyUp() {
+      let index = this.heap.length - 1;
+  
+      while (index > 0) {
+        const parent = Math.floor((index - 1) / 2);
+  
+        // Compare frequencies
+        if (this.heap[parent][1] >= this.heap[index][1]) {
+          break;
+        }
+  
+        [this.heap[parent], this.heap[index]] =
+          [this.heap[index], this.heap[parent]];
+  
+        index = parent;
+      }
+    }
+  
+    heapifyDown() {
+      let index = 0;
+  
+      while (true) {
+        const left = index * 2 + 1;
+        const right = index * 2 + 2;
+  
+        let largest = index;
+  
+        if (
+          left < this.heap.length &&
+          this.heap[left][1] > this.heap[largest][1]
+        ) {
+          largest = left;
+        }
+  
+        if (
+          right < this.heap.length &&
+          this.heap[right][1] > this.heap[largest][1]
+        ) {
+          largest = right;
+        }
+  
+        if (largest === index) {
+          break;
+        }
+  
+        [this.heap[index], this.heap[largest]] =
+          [this.heap[largest], this.heap[index]];
+  
+        index = largest;
+      }
+    }
+}
+
+
+function frequencySort(str) {
+    const frequencyMap = new Map();
+  
+    // Step 1: Count characters
+    for (let char of str) {
+      frequencyMap.set(
+        char,
+        (frequencyMap.get(char) || 0) + 1
+      );
+    }
+  
+    // Step 2: Put [character, frequency] into Max Heap
+    const maxHeap = new MaxHeap();
+  
+    for (let [char, frequency] of frequencyMap) {
+      maxHeap.push([char, frequency]);
+    }
+  
+    // Step 3: Remove highest frequency characters
+    let result = "";
+  
+    while (maxHeap.size() > 0) {
+      const [char, frequency] = maxHeap.pop();
+  
+      result += char.repeat(frequency);
+    }
+  
+    return result;
+}
