@@ -181,3 +181,118 @@
 
 // [12, 11]
 
+class MinHeap {
+    constructor() {
+      this.heap = [];
+    }
+  
+    size() {
+      return this.heap.length;
+    }
+  
+    push(item) {
+      this.heap.push(item);
+      this.heapifyUp();
+    }
+  
+    pop() {
+      if (this.heap.length === 0) {
+        return null;
+      }
+  
+      if (this.heap.length === 1) {
+        return this.heap.pop();
+      }
+  
+      const min = this.heap[0];
+  
+      this.heap[0] = this.heap.pop();
+  
+      this.heapifyDown();
+  
+      return min;
+    }
+  
+    peek() {
+      return this.heap[0];
+    }
+  
+    heapifyUp() {
+      let index = this.heap.length - 1;
+  
+      while (index > 0) {
+        const parent = Math.floor((index - 1) / 2);
+  
+        // Compare frequencies
+        if (this.heap[parent][1] <= this.heap[index][1]) {
+          break;
+        }
+  
+        [this.heap[parent], this.heap[index]] =
+          [this.heap[index], this.heap[parent]];
+  
+        index = parent;
+      }
+    }
+  
+    heapifyDown() {
+      let index = 0;
+  
+      while (true) {
+        const left = index * 2 + 1;
+        const right = index * 2 + 2;
+  
+        let smallest = index;
+  
+        if (
+          left < this.heap.length &&
+          this.heap[left][1] < this.heap[smallest][1]
+        ) {
+          smallest = left;
+        }
+  
+        if (
+          right < this.heap.length &&
+          this.heap[right][1] < this.heap[smallest][1]
+        ) {
+          smallest = right;
+        }
+  
+        if (smallest === index) {
+          break;
+        }
+  
+        [this.heap[index], this.heap[smallest]] =
+          [this.heap[smallest], this.heap[index]];
+  
+        index = smallest;
+      }
+    }
+}
+
+function findTopKFrequentNumbers(nums, k) {
+    const frequencyMap = new Map();
+  
+    // 1. Count frequencies
+    for (let num of nums) {
+      frequencyMap.set(
+        num,
+        (frequencyMap.get(num) || 0) + 1
+      );
+    }
+  
+    // 2. Min Heap
+    const minHeap = new MinHeap();
+  
+    // 3. Process each number + frequency
+    for (let [num, frequency] of frequencyMap) {
+      minHeap.push([num, frequency]);
+  
+      if (minHeap.size() > k) {
+        minHeap.pop();
+      }
+    }
+  
+    // 4. Get the numbers
+    return minHeap.heap.map(item => item[0]);
+}
