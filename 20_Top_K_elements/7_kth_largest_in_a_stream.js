@@ -142,3 +142,26 @@
 
 // add(4) // 6
 
+class KthLargest {
+    constructor(nums, k) {
+      this.k = k;
+      this.minHeap = new MinHeap();
+  
+      // Put initial numbers into the heap
+      for (let num of nums) {
+        this.add(num);
+      }
+    }
+  
+    add(num) {
+      this.minHeap.push(num);
+  
+      // Keep only K largest numbers
+      if (this.minHeap.size() > this.k) {
+        this.minHeap.pop();
+      }
+  
+      // Top = Kth largest
+      return this.minHeap.peek();
+    }
+}
