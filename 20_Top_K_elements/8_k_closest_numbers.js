@@ -190,3 +190,29 @@
 // Because we're deciding:
 
 // Should I move the window left or right?
+
+function findClosestNumbers(nums, k, x) {
+    let left = 0;
+    let right = nums.length - k;
+  
+    while (left < right) {
+      const mid = Math.floor((left + right) / 2);
+  
+      // Compare the two possible edges
+      if (x - nums[mid] > nums[mid + k] - x) {
+        // Right side is closer
+        left = mid + 1;
+      } else {
+        // Left side is closer
+        right = mid;
+      }
+    }
+  
+    return nums.slice(left, left + k);
+}
+
+nums = [2, 4, 5, 6, 9]
+K = 3
+X = 6
+
+
