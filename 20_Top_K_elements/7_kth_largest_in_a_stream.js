@@ -165,3 +165,77 @@ class KthLargest {
       return this.minHeap.peek();
     }
 }
+
+
+
+// Notice something clever:
+
+// We use the same add() method for the initial numbers.
+
+// So:
+
+// for (let num of nums) {
+//   this.add(num);
+// }
+
+// does exactly the same thing as when a new number arrives.
+
+// Why does this work?
+
+// Suppose:
+
+// K = 4
+
+// We always maintain:
+
+// ┌─────────────────────────┐
+// │ 4 largest numbers       │
+// │                         │
+// │ [5, 6, 11, 12]          │
+// └─────────────────────────┘
+
+// Because it's a Min Heap:
+
+//        5
+//       / \
+//      6   11
+//     /
+//    12
+
+// The smallest of these 4 is 5.
+
+// And think about what 5 means:
+
+// 12 → largest
+// 11 → 2nd largest
+// 6  → 3rd largest
+// 5  → 4th largest
+
+// Therefore:
+
+// Min Heap root = Kth largest
+// The pattern to remember
+
+// This is the same pattern we've already seen:
+
+// K largest numbers
+// Min Heap
+//    ↓
+// Keep K largest
+//    ↓
+// Remove smallest when size > K
+// Kth largest number
+// Min Heap
+//    ↓
+// Keep K largest
+//    ↓
+// peek()
+//    ↓
+// Kth largest
+
+// The important difference from Top K Numbers is:
+
+// We don't return the whole heap. We return peek(), because the root itself is the Kth largest.
+
+// Time for each add(): O(log K)
+// Space: O(K)
