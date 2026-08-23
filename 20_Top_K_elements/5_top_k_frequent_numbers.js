@@ -296,3 +296,57 @@ function findTopKFrequentNumbers(nums, k) {
     // 4. Get the numbers
     return minHeap.heap.map(item => item[0]);
 }
+
+
+
+// The most important thing to understand
+
+// Previously, for Top K Numbers:
+
+// number itself
+//      ↓
+// Min Heap
+//      ↓
+// keep K largest numbers
+
+// Here:
+
+// frequency
+//     ↓
+// Min Heap
+//     ↓
+// keep K largest frequencies
+
+// So the heap contains:
+
+// [number, frequency]
+
+// and we compare:
+
+// this.heap[parent][1]
+
+// The [1] means frequency.
+
+// For example:
+
+// [12, 2]
+
+// has:
+
+// [0] → 12   (number)
+// [1] → 2    (frequency)
+// Remember this pattern
+// Top K Frequent
+//       ↓
+// Count frequencies with Map
+//       ↓
+// Min Heap
+//       ↓
+// Heap size = K
+//       ↓
+// If size > K → remove lowest frequency
+//       ↓
+// Remaining K numbers = answer
+
+// Time: O(N + M log K) where M is the number of unique numbers.
+// Space: O(M + K).
