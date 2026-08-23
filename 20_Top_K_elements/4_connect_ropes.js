@@ -166,3 +166,29 @@
 
 // Done.
 
+function minimumCostToConnectRopes(ropes) {
+    const minHeap = new MinHeap();
+  
+    // Put all ropes into the Min Heap
+    for (let rope of ropes) {
+      minHeap.push(rope);
+    }
+  
+    let totalCost = 0;
+  
+    // Keep connecting until one rope remains
+    while (minHeap.size() > 1) {
+      const first = minHeap.pop();
+      const second = minHeap.pop();
+  
+      const cost = first + second;
+  
+      totalCost += cost;
+  
+      // Put the newly connected rope back
+      minHeap.push(cost);
+    }
+  
+    return totalCost;
+}
+
