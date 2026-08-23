@@ -232,3 +232,103 @@ function kClosest(points, k) {
   
     return maxHeap.heap;
 }
+
+
+// Let's trace Example 2
+// points = [[1,3], [3,4], [2,-1]]
+// K = 2
+
+// Distances:
+
+// [1,3]
+// 1² + 3² = 10
+
+// [3,4]
+// 3² + 4² = 25
+
+// [2,-1]
+// 2² + (-1)² = 5
+// Add [1,3]
+// Heap:
+// [1,3] → 10
+// Add [3,4]
+// Heap:
+
+//        [3,4] → 25
+//        /
+//  [1,3] → 10
+
+// We have 2 points, which is K.
+
+// Add [2,-1]
+
+// Distance is 5.
+
+// Now we temporarily have:
+
+// 10
+// 25
+// 5
+
+// We have 3 points, but K = 2.
+
+// So remove the largest distance:
+
+// 25
+
+// That removes:
+
+// [3,4]
+
+// We're left with:
+
+// [1,3] → 10
+// [2,-1] → 5
+
+// Therefore:
+
+// [[1,3], [2,-1]]
+// The important pattern
+
+// This is the same pattern we've been using:
+
+// K largest numbers
+// K largest
+//     ↓
+// Min Heap
+//     ↓
+// remove smallest
+// K smallest numbers
+// K smallest
+//     ↓
+// Max Heap
+//     ↓
+// remove largest
+// K closest points
+
+// Think:
+
+// K closest
+//     ↓
+// K smallest distances
+//     ↓
+// Max Heap
+//     ↓
+// remove largest distance
+
+// That's the connection.
+
+// One important detail
+
+// We use:
+
+// x * x + y * y
+
+// instead of:
+
+// Math.sqrt(x * x + y * y)
+
+// because we're only comparing distances. The square root doesn't change their ordering.
+
+// Time: O(N log K)
+// Space: O(K)
