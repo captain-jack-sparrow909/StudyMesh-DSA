@@ -233,3 +233,92 @@ function frequencySort(str) {
   
     return result;
 }
+
+
+// Let's trace "abcbab"
+// Frequency map
+// a → 2
+// b → 3
+// c → 1
+// Max Heap
+
+// Conceptually:
+
+//         b → 3
+//        /     \
+//    a → 2    c → 1
+// First pop()
+// b → 3
+
+// So:
+
+// result += "b".repeat(3);
+
+// Result:
+
+// "bbb"
+// Second pop()
+// a → 2
+
+// Result:
+
+// "bbbaa"
+// Third pop()
+// c → 1
+
+// Result:
+
+// "bbbaac"
+
+// Done.
+
+// One thing that might confuse you
+
+// Why do we use:
+
+// char.repeat(frequency)
+
+// If:
+
+// char = "b"
+// frequency = 3
+
+// then:
+
+// "b".repeat(3)
+
+// produces:
+
+// "bbb"
+
+// So instead of doing:
+
+// result += char;
+// result += char;
+// result += char;
+
+// we can simply do:
+
+// result += char.repeat(frequency);
+// Connect it to the previous problem
+
+// You can think of the problems like this:
+
+// Top K Frequent Numbers
+// Count frequency
+//       ↓
+// Min Heap
+//       ↓
+// Keep only K
+// Frequency Sort
+// Count frequency
+//       ↓
+// Max Heap
+//       ↓
+// Take ALL
+//       ↓
+// Highest frequency first
+
+// The big difference is that here we don't remove anything because of a K limit.
+
+// We simply keep popping until the heap is empty.
