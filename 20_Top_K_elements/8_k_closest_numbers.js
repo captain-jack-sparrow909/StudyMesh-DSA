@@ -211,8 +211,130 @@ function findClosestNumbers(nums, k, x) {
     return nums.slice(left, left + k);
 }
 
-nums = [2, 4, 5, 6, 9]
-K = 3
-X = 6
+// nums = [2, 4, 5, 6, 9]
+// K = 3
+// X = 6
 
 
+// Let's understand the confusing part
+
+// This:
+
+// if (x - nums[mid] > nums[mid + k] - x)
+
+// is basically asking:
+
+// How far is X from the LEFT edge?
+
+//         versus
+
+// How far is X from the RIGHT edge?
+
+// Suppose:
+
+// nums = [2, 4, 5, 6, 9]
+// K = 3
+// X = 6
+
+// Consider:
+
+// [2, 4, 5]
+
+// Left edge:
+
+// 6 - 2 = 4
+
+// Right edge outside the window:
+
+// 6 - 6 = 0
+
+// So:
+
+// 4 > 0
+
+// The right side is closer.
+
+// Therefore we move the window right.
+
+// Eventually:
+
+// [4, 5, 6]
+// Why nums[mid + k]?
+
+// This is an important detail.
+
+// Suppose:
+
+// K = 3
+
+// and the window starts at:
+
+// mid = 0
+
+// The window is:
+
+// [nums[0], nums[1], nums[2]]
+
+// The element immediately outside the right side is:
+
+// nums[3]
+
+// That's:
+
+// nums[mid + k]
+
+// So we're comparing:
+
+// left edge of current window
+//         ↓
+// nums[mid]
+
+//         with
+
+// right edge just outside window
+//         ↓
+// nums[mid + k]
+// Example 2
+// nums = [2, 4, 5, 6, 9]
+// K = 3
+// X = 6
+
+// Possible answer:
+
+// [4, 5, 6]
+
+// The final window starts at index 1.
+
+// 2 | 4  5  6 | 9
+//     ←  K=3  →
+
+// Return:
+
+// [4, 5, 6]
+// Do we need a heap?
+
+// No.
+
+// This is an important distinction from:
+
+// K Closest Points
+
+// There, the points aren't sorted, so we used a heap.
+
+// Here:
+
+// array is sorted
+
+// That gives us much more information, allowing us to use binary search + sliding window.
+
+// Remember:
+// Unsorted + K closest
+//         ↓
+//       Heap
+
+// Sorted + K closest
+//         ↓
+// Binary search / two pointers
+
+// Time: O(log(N-K) + K)
+// Space: O(K) for the returned array.
