@@ -192,3 +192,99 @@ function minimumCostToConnectRopes(ropes) {
     return totalCost;
 }
 
+
+// The important part
+
+// This is the core:
+
+// const first = minHeap.pop();
+// const second = minHeap.pop();
+
+// const cost = first + second;
+
+// totalCost += cost;
+
+// minHeap.push(cost);
+
+// Think of it as:
+
+//        Min Heap
+//           ↓
+//    smallest + smallest
+//           ↓
+//       new rope
+//           ↓
+//     put it back
+//           ↓
+//        repeat
+// Why do we put the new rope back?
+
+// This is very important.
+
+// Suppose:
+
+// 1 + 3 = 4
+
+// We've created a rope of length 4.
+
+// But that rope still needs to be connected to the other ropes.
+
+// So we now have:
+
+// [4, 5, 11]
+
+// That's why:
+
+// minHeap.push(cost);
+
+// Without putting 4 back, we wouldn't be able to use it in the next connection.
+
+// Example 2
+// [3, 4, 5, 6]
+// First:
+// 3 + 4 = 7
+// cost = 7
+
+// Heap:
+
+// [5, 6, 7]
+// Second:
+// 5 + 6 = 11
+// cost = 7 + 11 = 18
+
+// Heap:
+
+// [7, 11]
+// Third:
+// 7 + 11 = 18
+// cost = 18 + 18 = 36
+
+// Answer:
+
+// 36
+// The pattern to remember
+
+// This is a Greedy + Min Heap problem.
+
+// Whenever you see:
+
+// "Connect things with minimum total cost"
+
+// and the cost of combining two things is their sum, think:
+
+// MIN HEAP
+//    ↓
+// Take 2 smallest
+//    ↓
+// Combine
+//    ↓
+// Add cost
+//    ↓
+// Put result back
+//    ↓
+// Repeat
+
+// This is also the same underlying idea used by Huffman coding.
+
+// Time: O(N log N)
+// Space: O(N)
