@@ -256,3 +256,108 @@ function scheduleTasks(tasks, k) {
 // Frequency Map → Max Heap → Cooling Queue → Count intervals
 
 // This is essentially the same pattern as Rearrange String K Distance Apart, except here we count the idle intervals too.
+
+
+
+
+
+
+
+
+
+
+// even though problem is asking for "find the minimum number" but still we used max heap
+
+// Yes — and this is an important distinction.
+
+// The word "minimum" in the question does NOT automatically mean Min Heap.
+
+// Here, we're trying to minimize the total CPU intervals, but we use a Max Heap because of how we achieve that minimum.
+
+// Think about the goal
+
+// We want to finish:
+
+// a a a b c c
+
+// as quickly as possible.
+
+// a appears 3 times, so a is the hardest task to schedule.
+
+// a → 3
+// c → 2
+// b → 1
+
+// We should always prioritize the task with the highest frequency.
+
+// That's exactly what a Max Heap gives us:
+
+// Max Heap
+//    ↓
+// highest frequency task
+//    ↓
+// run it
+//    ↓
+// put it into cooling period
+//    ↓
+// run another high-frequency task
+
+// This reduces the chance of ending up with unnecessary idle time.
+
+// Why not Min Heap?
+
+// If we used a Min Heap, we'd choose:
+
+// b → 1
+
+// first.
+
+// Then maybe:
+
+// c → 2
+
+// Then:
+
+// a → 3
+
+// We're prioritizing the easy tasks instead of the difficult/high-frequency task.
+
+// That can create more idle time later.
+
+// The rule I want you to remember
+
+// Don't think:
+
+// "The problem says minimum, therefore Min Heap."
+
+// Instead ask:
+
+// What element do I need to access quickly to achieve the minimum?
+
+// For this problem:
+
+// "I need the task with the highest frequency."
+
+// Therefore:
+
+// Max Heap.
+
+// This is the same reason we used a Max Heap for:
+
+// Rearrange String
+// Rearrange String K Distance Apart
+// Scheduling Tasks
+
+// All three have the same underlying idea:
+
+// Need to deal with the most frequent item first
+//                     ↓
+//                  Max Heap
+
+// Whereas problems like:
+
+// Connect Ropes with minimum cost
+
+// use a Min Heap, because there we specifically need the two smallest ropes at every step.
+
+// So the optimization goal (minimum/maximum) doesn't determine the heap type by itself — the element you need to repeatedly select does.
