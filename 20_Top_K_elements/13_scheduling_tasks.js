@@ -14,3 +14,11 @@
 // ```
 
 // solution:
+// This is another Max Heap + Queue problem, very similar to the previous one.
+
+// The difference is:
+
+// Rearrange String K Distance Apart: arrange characters.
+// Scheduling Tasks: calculate how many CPU intervals are needed, including idle.
+
+
