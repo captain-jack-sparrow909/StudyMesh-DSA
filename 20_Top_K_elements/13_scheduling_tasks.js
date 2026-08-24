@@ -22,3 +22,57 @@
 // Scheduling Tasks: calculate how many CPU intervals are needed, including idle.
 
 
+function scheduleTasks(tasks, k) {
+    // Count frequency of each task
+    const frequencyMap = new Map();
+  
+    for (const task of tasks) {
+      frequencyMap.set(
+        task,
+        (frequencyMap.get(task) || 0) + 1
+      );
+    }
+  
+    // Max Heap stores [task, frequency]
+    const maxHeap = new MaxHeap();
+  
+    for (const [task, frequency] of frequencyMap) {
+      maxHeap.push([task, frequency]);
+    }
+  
+    // Tasks that are cooling down
+    const queue = [];
+  
+    let intervals = 0;
+  
+    while (maxHeap.size() > 0 || queue.length > 0) {
+      intervals++;
+  
+      // If a task is available, execute the most frequent one
+      if (maxHeap.size() > 0) {
+        const [task, frequency] = maxHeap.pop();
+  
+        // One occurrence has been executed
+        const remaining = frequency - 1;
+  
+        // If it still has occurrences,
+        // put it into the cooling queue
+        if (remaining > 0) {
+          queue.push([task, remaining, intervals + k]);
+        }
+      }
+  
+      // Check if the task at the front of the queue
+      // has finished cooling
+      if (
+        queue.length > 0 &&
+        queue[0][2] === intervals
+      ) {
+        const [task, frequency] = queue.shift();
+  
+        maxHeap.push([task, frequency]);
+      }
+    }
+  
+    return intervals;
+}
