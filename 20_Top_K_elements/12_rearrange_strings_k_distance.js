@@ -28,3 +28,15 @@
 // ```
 
 // solution:
+// This is very similar to the previous Rearrange String problem, but now instead of saying:
+
+// same characters cannot be next to each other
+
+// we say:
+
+// same characters must have at least K positions between them.
+
+// The pattern is:
+
+// Frequency Map → Max Heap → Queue
+
