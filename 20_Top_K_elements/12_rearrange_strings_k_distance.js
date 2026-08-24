@@ -40,3 +40,58 @@
 
 // Frequency Map → Max Heap → Queue
 
+
+function rearrangeStringKDistance(str, k) {
+    if (k <= 1) {
+      return str;
+    }
+  
+    // Count frequencies
+    const frequencyMap = new Map();
+  
+    for (const char of str) {
+      frequencyMap.set(
+        char,
+        (frequencyMap.get(char) || 0) + 1
+      );
+    }
+  
+    // Max Heap: [character, frequency]
+    const maxHeap = new MaxHeap();
+  
+    for (const [char, frequency] of frequencyMap) {
+      maxHeap.push([char, frequency]);
+    }
+  
+    // Characters that are temporarily unavailable
+    const queue = [];
+  
+    let result = "";
+  
+    while (maxHeap.size() > 0) {
+      const [char, frequency] = maxHeap.pop();
+  
+      result += char;
+  
+      // Put the character into the waiting queue
+      queue.push([char, frequency - 1]);
+  
+      // Once a character has waited K positions,
+      // it can be used again.
+      if (queue.length >= k) {
+        const [releasedChar, releasedFrequency] = queue.shift();
+  
+        if (releasedFrequency > 0) {
+          maxHeap.push([
+            releasedChar,
+            releasedFrequency
+          ]);
+        }
+      }
+    }
+  
+    // If result doesn't contain every character,
+    // rearrangement wasn't possible.
+    return result.length === str.length ? result : "";
+}
+
