@@ -76,3 +76,183 @@ function scheduleTasks(tasks, k) {
   
     return intervals;
 }
+
+
+// Example
+// scheduleTasks(
+//   ["a", "a", "a", "b", "c", "c"],
+//   2
+// );
+
+// Frequencies:
+
+// a → 3
+// c → 2
+// b → 1
+
+// Max Heap:
+
+// a → 3
+// c → 2
+// b → 1
+// Let's execute it
+// Interval 1
+
+// Take the most frequent task:
+
+// a
+// a → cooling
+
+// Result so far:
+
+// a
+// Interval 2
+
+// a is cooling, so take:
+
+// c
+// a → cooling
+// c → cooling
+
+// Result:
+
+// a → c
+// Interval 3
+
+// Both a and c are cooling.
+
+// b is available:
+
+// a → c → b
+// Interval 4
+
+// a has finished cooling.
+
+// Run:
+
+// a
+
+// Result:
+
+// a → c → b → a
+// Interval 5
+
+// c has finished cooling.
+
+// Run:
+
+// c
+
+// Result:
+
+// a → c → b → a → c
+// Interval 6
+
+// What's available?
+
+// a → cooling
+// c → cooling
+// b → finished
+
+// Nothing can run.
+
+// So the CPU must be idle:
+
+// a → c → b → a → c → idle
+
+// That's why we still increase:
+
+// intervals++;
+
+// even though no task was executed.
+
+// Interval 7
+
+// a has finished cooling.
+
+// Run:
+
+// a
+
+// Final schedule:
+
+// a → c → b → a → c → idle → a
+
+// Therefore:
+
+// 7
+// The important idea
+
+// There are two things happening:
+
+// Max Heap
+
+// The Max Heap tells us:
+
+// Which available task should I run?
+
+// We choose the task with the highest frequency because it is the most difficult task to schedule.
+
+// Queue
+
+// The Queue tells us:
+
+// Which task is currently cooling down?
+
+// For example:
+
+// a
+// ↓
+// cooling
+// ↓
+// wait K intervals
+// ↓
+// available again
+// Why Max Heap?
+
+// Imagine:
+
+// a a a a a
+// b
+// c
+
+// If we keep running a, we'd get:
+
+// a → idle → idle → idle → idle → a...
+
+// Instead, we want to use other tasks to fill the cooling periods.
+
+// So we prioritize the task with the highest frequency.
+
+// Why Queue?
+
+// Once we run:
+
+// a
+
+// we can't immediately put a back into the heap.
+
+// It must wait.
+
+// So:
+
+// Max Heap
+//    ↓
+//  take task
+//    ↓
+//  Cooling Queue
+//    ↓
+//  wait K intervals
+//    ↓
+//  Max Heap again
+// Remember this pattern
+
+// When you see:
+
+// Tasks + cooling period + minimum CPU intervals + idle
+
+// think:
+
+// Frequency Map → Max Heap → Cooling Queue → Count intervals
+
+// This is essentially the same pattern as Rearrange String K Distance Apart, except here we count the idle intervals too.
