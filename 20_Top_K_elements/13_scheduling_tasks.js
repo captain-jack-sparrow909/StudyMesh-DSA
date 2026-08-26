@@ -360,4 +360,5 @@ function scheduleTasks(tasks, k) {
 
 // use a Min Heap, because there we specifically need the two smallest ropes at every step.
 
-// So the optimization goal (minimum/maximum) doesn't determine the heap type by itself — the element you need to repeatedly select does.
+// So the optimization goal (minimum/maximum) doesn't determine the heap type by itself — 
+// the element you need to repeatedly select does.
