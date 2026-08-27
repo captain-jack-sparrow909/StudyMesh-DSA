@@ -149,4 +149,5 @@ function connectAllLevelOrderSiblings(root) {
 
 // let previousNode = null;
 
-// We also do not need levelSize, because we do not need to separate the levels.
+// We also do not need levelSize, 
+// because we do not need to separate the levels.
