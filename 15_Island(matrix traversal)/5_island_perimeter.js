@@ -128,8 +128,6 @@ function islandPerimeter(grid) {
 // For every land cell:
 //     +4
 
-// If connected to land above:
-//     -2
+// If connected to land above: -2
 
-// If connected to land on left:
-//     -2
+// If connected to land on left: -2
