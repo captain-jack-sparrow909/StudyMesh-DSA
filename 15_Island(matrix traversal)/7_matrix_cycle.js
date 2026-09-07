@@ -279,4 +279,5 @@ function hasCycle(grid) {
 // newRow, newCol
 // = where I might move next
 
-// We calculate them because DFS needs to inspect the cells around the current cell.
+// We calculate them because DFS needs to 
+// inspect the cells around the current cell.
